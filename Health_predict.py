@@ -72,6 +72,17 @@ input_data = pd.DataFrame({
 if st.button("Predict Risk Level"):
     predicted_risk = predict_risk_level(input_data)
 
-    if predicted_risk:
+    if predicted_risk is not None:
         st.subheader("Predicted Health Risk Level:")
-        st.write(f"**{predicted_risk}**")
+        
+        # Display styled output based on predicted risk level
+        if predicted_risk == 'High':
+            st.error(f"🚨 **{predicted_risk}**")
+        elif predicted_risk == 'Medium':
+            st.warning(f"⚠️ **{predicted_risk}**")
+        elif predicted_risk == 'Low':
+            st.info(f"ℹ️ **{predicted_risk}**")
+        elif predicted_risk == 'Normal':
+            st.success(f"✅ **{predicted_risk}**")
+        else:
+            st.write(f"**{predicted_risk}**")
